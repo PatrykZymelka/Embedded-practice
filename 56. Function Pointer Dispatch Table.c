@@ -40,6 +40,19 @@ Output: 2
 #include <stdio.h>
 #include <stdint.h>
 
+int add(int a, int b){ 
+    return a+b;
+}
+
+int substract(int a, int b){
+    return a-b;
+}
+int multiply(int a, int b){
+    return a*b;
+}
+int divide(int a, int b){
+    return a/b;
+}
 
 void binary_visualization(void * reg, int bit_len){
      
@@ -66,10 +79,20 @@ void binary_visualization(void * reg, int bit_len){
     printf("\n");
 }
 
+void arr_dipatch_table(int a, int b, int n){
+    int (*fun_ptr[4])(int, int) = {add, substract, multiply, divide};
+    
+    int result = fun_ptr[n](a,b);
 
+    printf("%d", result);
+
+}
 
 int main(){
+    int a,b,n;
+    scanf("%d %d %d", &a, &b, &n);
 
+    arr_dipatch_table(a, b, n);
     
     return 0;
 }
