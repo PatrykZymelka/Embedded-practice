@@ -1,26 +1,32 @@
 /*
-You are given a block of memory (as an integer array) of size n.
+You are given a memory block as an integer array of size n. 
 
-Your task is to write a function that scans the memory using pointers and detects the first occurrence of three consecutive increasing integers — for example: [4, 5, 6] or [10, 11, 12].
+Your task is to check if a segment of size k starting from the beginning of the array follows an alternating pattern — e.g., 1 0 1 0 ... or 0 1 0 1 ....
 
-Return the starting index of the first such pattern. If no such pattern is found, return -1.You must use pointer logic only, not array indexing.
+Return:
+
+    1 if the segment follows an alternating pattern
+    0 if not
+
+You must use pointer arithmetic only, not array indexing.
+
  
 
 Example-1
 
-Input: n = 8, memory = [2, 4, 5, 6, 9, 11, 12, 14]
+Input: n = 6, k = 6, mem = [1, 0, 1, 0, 1, 0]
 Output: 1
 
 
 Example-2
 
-Input: n = 6, memory = [10, 20, 30, 40, 50, 60]
-Output: -1
+Input: n = 6, k = 6, mem = [0, 1, 0, 1, 0, 1]
+Output: 1
 
 
 Example-3
 
-Input: n = 7, memory = [1, 2, 3, 5, 6, 7, 8]
+Input: n = 6, k = 6, mem = [1, 1, 0, 1, 0, 1]
 Output: 0
 */
 
@@ -53,30 +59,29 @@ void binary_visualization(void * reg, int bit_len){
     printf("\n");
 }
 
-int three_cons(int * arr, int n){
+int pattern(int * arr, int n){
 
-    for(int i = 0; i < n; i ++){
-        if(arr[i]+1 == arr[i+1] && arr[i+1]+1 == arr[i+2]){
-            return i;
+    for(int i = 0; i < n-1; i++){
+        if(*(arr+i) == *(arr+i+1)){
+            return 0;
         }
     }
-    return -1;
+    return 1;
+
 }
 
-
 int main(){
+
     int n;
-    int arr[100];
     scanf("%d", &n);
 
+    int arr[100];
     for(int i = 0; i < n; i++){
         scanf("%d", &arr[i]);
     }
 
-    int result = three_cons(arr, n);
+    int result = pattern(arr, n);
+    printf("%d\n", result);
 
-    printf("%d", result);
-
-    
     return 0;
 }
